@@ -81,8 +81,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addForm) {
         addForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const title = document.getElementById('add-title').value;
+
+            if (!title.trim()) {
+                alert('Please enter a title for the recipe.');  // Alert the user to add a title
+                return;  // Stop the function if no title is provided
+            }
+
             const newRecipe = {
-                title: document.getElementById('add-title').value,
+                title: title,
                 ingredients: document.getElementById('add-ingredients').value.split(',').map(ingredient => ingredient.trim()),
                 instructions: document.getElementById('add-instructions').value,
                 cookingTime: parseInt(document.getElementById('add-cookingTime').value, 10),
@@ -112,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         editRecipe(id); // Call the editRecipe function with the id
     });
 });
+
 
 const escapeHtml = (text) => {
     return text
